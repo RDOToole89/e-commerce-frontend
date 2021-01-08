@@ -3,7 +3,6 @@ import { withRouter } from 'react-router-dom';
 import './MenuItem.scss';
 
 function MenuItem({ title, imageUrl, size, history, linkUrl, match }) {
-  console.log('URL', linkUrl);
   return (
     <div
       className={`${size} menu-item`}
@@ -23,4 +22,6 @@ function MenuItem({ title, imageUrl, size, history, linkUrl, match }) {
   );
 }
 
+// withRouter is used to add the history, match and location objects to
+// a component that's not a direct child.
 export default withRouter(MenuItem);
