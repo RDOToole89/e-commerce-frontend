@@ -6,7 +6,7 @@ import { auth } from '../../firebase/firebase.utils';
 import './Header.scss';
 
 function Header({ currentUser }) {
-  console.log(currentUser);
+  // console.log(currentUser);
 
   return (
     <div className='header'>

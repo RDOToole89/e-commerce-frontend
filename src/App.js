@@ -19,11 +19,24 @@ class App extends Component {
 
   componentDidMount() {
     // configuration for firebase auth
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (user) => {
-      // this.setState({ currentUser: user });
-      const data = await createUserProfileDocument(user);
-      console.log(data);
-      // the user object coming back from firebase
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
+
+        userRef.onSnapshot((snapShot) => {
+          // console.log(snapShot.data());
+          this.setState(
+            {
+              currentUser: {
+                id: snapShot.id,
+                ...snapShot.data(),
+              },
+            },
+            () => console.log('STATE', this.state)
+          );
+        });
+      }
+      this.setState({ currentUser: userAuth });
     });
   }
 
